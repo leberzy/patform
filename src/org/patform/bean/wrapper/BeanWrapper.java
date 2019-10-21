@@ -4,6 +4,7 @@ import org.patform.bean.PropertyValue;
 import org.patform.bean.PropertyValues;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author leber
@@ -17,7 +18,7 @@ public interface BeanWrapper {
 
     Class<?> getWrappedClass();
 
-    Object getPropertyValue(String propertyName);
+    Object getPropertyValue(String propertyName) throws InvocationTargetException, IllegalAccessException;
 
     void setPropertyValue(String name,Object value);
 
@@ -29,10 +30,14 @@ public interface BeanWrapper {
 
     boolean isReadableProperty(String name);
 
-    boolean isWritableProperty(String name);
+    boolean isWritableProperty(String name) throws InvocationTargetException, IllegalAccessException;
 
 
     PropertyDescriptor[] getPropertyDescriptors();
 
-    PropertyDescriptor getPropertyDescriptor(String name);
+    PropertyDescriptor getPropertyDescriptor(String name) throws InvocationTargetException, IllegalAccessException;
+
+    default boolean isNestProperty(String propertyName) {
+        return propertyName.contains(NESTED_PROPERTY_SEPARATOR);
+    }
 }
