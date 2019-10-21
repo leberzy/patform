@@ -148,7 +148,7 @@ public abstract class BeanUtils {
 	 * @throws IllegalArgumentException if the classes of source and target do not match
 	 */
 	public static void copyProperties(Object source, Object target)
-	    throws IllegalArgumentException, BeansException {
+			throws IllegalArgumentException, BeansException, InvocationTargetException, IllegalAccessException {
 		copyProperties(source, target, null);
 	}
 
@@ -161,7 +161,7 @@ public abstract class BeanUtils {
 	 * @throws IllegalArgumentException if the classes of source and target do not match
 	 */
 	public static void copyProperties(Object source, Object target, String[] ignoreProperties)
-	    throws IllegalArgumentException, BeansException {
+			throws IllegalArgumentException, BeansException, InvocationTargetException, IllegalAccessException {
 		if (source == null || !source.getClass().isInstance(target)) {
 			throw new IllegalArgumentException("Target must an instance of source");
 		}

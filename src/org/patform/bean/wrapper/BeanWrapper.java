@@ -20,13 +20,13 @@ public interface BeanWrapper {
 
     Object getPropertyValue(String propertyName) throws InvocationTargetException, IllegalAccessException;
 
-    void setPropertyValue(String name,Object value);
+    void setPropertyValue(String name,Object value) throws InvocationTargetException, IllegalAccessException;
 
-    void setPropertyValue(PropertyValue propertyValue);
+    void setPropertyValue(PropertyValue propertyValue) throws InvocationTargetException, IllegalAccessException;
 
-    void setPropertyValues(PropertyValues pvs);
+    void setPropertyValues(PropertyValues pvs) throws InvocationTargetException, IllegalAccessException;
 
-    void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown);
+    void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) throws InvocationTargetException, IllegalAccessException;
 
     boolean isReadableProperty(String name);
 

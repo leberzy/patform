@@ -177,7 +177,7 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
         synchronized (this.aliasNames) {
             String name = aliasNames.get(alias);
             if (Objects.nonNull(name)) {
-                throw new BeansException();
+                throw new BeansException("");
             }
             aliasNames.put(alias, beanName);
         }

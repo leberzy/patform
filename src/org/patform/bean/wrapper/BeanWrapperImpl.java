@@ -81,6 +81,7 @@ public class BeanWrapperImpl implements BeanWrapper {
     private void setPropertyValue(String propertyName, String actualName, String key, Object value) throws InvocationTargetException, IllegalAccessException {
         //设置数组，集合等字段内的值
         Object propertyValue = getPropertyValue(actualName);
+
         if (Objects.isNull(propertyName)) {
             throw new BeanWrapperException("未初始化值");
         } else if (propertyValue.getClass().isArray()) {
@@ -132,7 +133,9 @@ public class BeanWrapperImpl implements BeanWrapper {
         PropertyDescriptor pd = getPropertyDescriptor(actualName);
         Method readMethod = pd.getReadMethod();
         Object value = readMethod.invoke(object);
-        if (value.getClass().isArray()) {
+        if (Objects.isNull(value)) {
+            return null;
+        }else if (value.getClass().isArray()) {
             Object[] arr = (Object[]) value;
             return arr[Integer.parseInt(key)];
         } else if (value instanceof List) {
@@ -158,25 +161,19 @@ public class BeanWrapperImpl implements BeanWrapper {
     }
 
     @Override
-    public void setPropertyValue(String name, Object value) {
-        PropertyDescriptor pd = cachedIntrospectionResults.getPropertyDescriptor(name);
-        Method writeMethod = pd.getWriteMethod();
-        try {
-            writeMethod.invoke(object, value);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    public void setPropertyValue(String name, Object value) throws InvocationTargetException, IllegalAccessException {
+
+        String[] tokens = getPropertyNameTokens(name);
+        setPropertyValue(tokens[0],tokens[1],tokens[2],value);
     }
 
     @Override
-    public void setPropertyValue(PropertyValue propertyValue) {
+    public void setPropertyValue(PropertyValue propertyValue) throws InvocationTargetException, IllegalAccessException {
         setPropertyValue(propertyValue.getName(), propertyValue.getValue());
     }
 
     @Override
-    public void setPropertyValues(PropertyValues pvs) {
+    public void setPropertyValues(PropertyValues pvs) throws InvocationTargetException, IllegalAccessException {
         PropertyValue[] propertyValues = pvs.getPropertyValues();
         for (PropertyValue propertyValue : propertyValues) {
             setPropertyValue(propertyValue);
@@ -184,7 +181,7 @@ public class BeanWrapperImpl implements BeanWrapper {
     }
 
     @Override
-    public void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) {
+    public void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) throws InvocationTargetException, IllegalAccessException {
         PropertyValue[] propertyValues = pvs.getPropertyValues();
         for (PropertyValue propertyValue : propertyValues) {
             setPropertyValue(propertyValue);
