@@ -1,6 +1,7 @@
 package org.patform.test;
 
 import org.junit.Test;
+import org.patform.bean.PropertyValue;
 import org.patform.bean.wrapper.BeanWrapperImpl;
 import org.patform.test.bean.Cat;
 import org.patform.test.bean.User;
@@ -11,7 +12,8 @@ import java.util.HashMap;
 
 public class BeanWrapperImplTest {
 
-    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
+    @Test
+    public void test() throws InvocationTargetException, IllegalAccessException {
 
         BeanWrapperImpl user = new BeanWrapperImpl(User.class);
         Cat cat = new Cat();
@@ -29,10 +31,16 @@ public class BeanWrapperImplTest {
 
         user.setPropertyValue("map", new HashMap<>());
         user.setPropertyValue("map[jack]", cat);
+
+        user.setPropertyValue(new PropertyValue("cat.map",new HashMap<>()));
+        user.setPropertyValue(new PropertyValue("cat.map[key]","catMapValue"));
+
         System.out.println(user.getInstance());
     }
 
-    public static void amain(String[] args) {
+
+    @Test
+    public void test001() {
 
 
 
