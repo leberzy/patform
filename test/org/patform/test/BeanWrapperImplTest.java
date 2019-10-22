@@ -18,4 +18,6 @@ public class BeanWrapperImplTest {
         user.setPropertyValue("cat.name","jack");
         System.out.println(user);
     }
+
+
 }
