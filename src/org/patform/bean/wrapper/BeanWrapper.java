@@ -28,7 +28,7 @@ public interface BeanWrapper {
 
     void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) throws InvocationTargetException, IllegalAccessException;
 
-    boolean isReadableProperty(String name);
+    boolean isReadableProperty(String name) throws InvocationTargetException, IllegalAccessException;
 
     boolean isWritableProperty(String name) throws InvocationTargetException, IllegalAccessException;
 
