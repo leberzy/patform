@@ -18,17 +18,17 @@ public interface BeanWrapper {
 
     Class<?> getWrappedClass();
 
-    Object getPropertyValue(String propertyName) throws InvocationTargetException, IllegalAccessException;
+    Object getPropertyValue(String propertyName) ;
 
-    void setPropertyValue(String name,Object value) throws InvocationTargetException, IllegalAccessException;
+    void setPropertyValue(String name, Object value);
 
-    void setPropertyValue(PropertyValue propertyValue) throws InvocationTargetException, IllegalAccessException;
+    void setPropertyValue(PropertyValue propertyValue);
 
-    void setPropertyValues(PropertyValues pvs) throws InvocationTargetException, IllegalAccessException;
+    void setPropertyValues(PropertyValues pvs);
 
-    void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) throws InvocationTargetException, IllegalAccessException;
+    void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown);
 
-    boolean isReadableProperty(String name) throws InvocationTargetException, IllegalAccessException;
+    boolean isReadableProperty(String name) ;
 
     boolean isWritableProperty(String name) throws InvocationTargetException, IllegalAccessException;
 
