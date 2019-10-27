@@ -8,22 +8,22 @@ import java.util.Objects;
 public class RootBeanDefinition extends AbstractBeanDefinition {
     //注入方式
     //不注入
-    private static final int AUTOWIRE_NO = 0;
+    public static final int AUTOWIRE_NO = 0;
     //根据名称注入
-    private static final int AUTOWIRE_BY_NAME = 1;
+    public static final int AUTOWIRE_BY_NAME = 1;
     //根据类型注入
-    private static final int AUTOWIRE_BY_TYPE = 2;
+    public static final int AUTOWIRE_BY_TYPE = 2;
     //根据构造方法注入
-    private static final int AUTOWIRE_CONSTRUCTOR = 3;
+    public static final int AUTOWIRE_CONSTRUCTOR = 3;
     //自动推断
-    private static final int AUTOWIRE_AUTODETECT = 4;
+    public static final int AUTOWIRE_AUTODETECT = 4;
 
     //--------------------dependency check-------------------------
     //不进行依赖检查
-    private static final int DEPENDENCY_CHECK_NO = 0;
-    private static final int DEPENDENCY_CHECK_OBJECTS = 1;//
-    private static final int DEPENDENCY_CHECK_SIMPLE = 2;//
-    private static final int DEPENDENCY_CHECK_ALL = 3;
+    public static final int DEPENDENCY_CHECK_NO = 0;
+    public static final int DEPENDENCY_CHECK_OBJECTS = 1;//
+    public static final int DEPENDENCY_CHECK_SIMPLE = 2;//
+    public static final int DEPENDENCY_CHECK_ALL = 3;
 
     //数据
     private Class<?> beanClass;//类对象或类全路径名

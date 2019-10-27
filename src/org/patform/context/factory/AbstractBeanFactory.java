@@ -1,12 +1,18 @@
 package org.patform.context.factory;
 
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import org.patform.bean.RootBeanDefinition;
 import org.patform.context.util.BeanPostProcessor;
 import org.patform.exception.BeansException;
 import org.patform.exception.NoSuchBeanDefinitionException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author leber
@@ -18,7 +24,7 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
 
     private BeanFactory parentBeanFactory;
 
-    private Set<Class<?>> ignoreDependencyTypes = new HashSet<>();
+    protected Set<Class<?>> ignoreDependencyTypes = new HashSet<>();
 
     private List<BeanPostProcessor> beanProcessor = new ArrayList<>();
 
