@@ -16,7 +16,7 @@ public interface ListableBeanFactory extends BeanFactory {
 
     String[] getBeanDefinitionNames(Class<?> type);
 
-    Map<String, BeanDefinition> getBeanDefinitionOfType(Class<?> requireType, boolean includeProtoType, boolean includeFactoryBeans);
+    Map<String, Object> getBeansOfType(Class<?> requireType, boolean includeProtoType, boolean includeFactoryBeans);
 
 
 }

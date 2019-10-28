@@ -36,10 +36,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private static Logger logger = LoggerFactory.getLogger(AbstractAutowireCapableBeanFactory.class);
 
-    @Override
-    public RootBeanDefinition getBeanDefinition(String beanName) {
-        return null;
-    }
 
     /**
      * 调用方法已实现了单例及原型模式的处理，此处需要实现构造注入，及普通依赖注入，调用Aware事件，以及前置后置处理器
@@ -179,7 +175,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      */
     protected void invokeInitMethods(Object bean, String beanName, RootBeanDefinition beanDefinition) {
         String initMethod = beanDefinition.getInitMethod();
+        if (Objects.isNull(initMethod)) {
+            return;
+        }
         try {
+
             Method method = bean.getClass().getMethod(initMethod);
             method.invoke(bean);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
