@@ -220,6 +220,7 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
         Object bean = this.singletonCache.get(key);
         if (Objects.nonNull(bean)) {
             destroySingleton(key, bean);
+            singletonCache.remove(key);
         }
     }
 
@@ -257,6 +258,10 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
             sharedBean = factoryBean.getObject();
         }
         return sharedBean;
+    }
+
+    public List<BeanPostProcessor> getBeanProcessor() {
+        return beanProcessor;
     }
 
 
