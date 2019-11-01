@@ -57,6 +57,11 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
         super(propertyValues);
     }
 
+    public RootBeanDefinition(Class<?> beanClass, int autowireMode, int dependencyCheck) {
+        this(beanClass, autowireMode);
+        this.dependencyCheck = dependencyCheck;
+    }
+
     @Override
     public ConstructorArgumentValues getConstructorValues() {
         return null;

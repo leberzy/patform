@@ -117,8 +117,10 @@ public abstract class BeanUtils {
 	 */
 	public static boolean isSimpleProperty(Class clazz) {
 		return clazz.isPrimitive() || isPrimitiveArray(clazz) || isPrimitiveWrapperArray(clazz) ||
-		    clazz.equals(String.class) || clazz.equals(String[].class) ||
-		    clazz.equals(Class.class) || clazz.equals(Class[].class);
+				clazz.equals(String.class) || clazz.equals(String[].class) ||
+				clazz.equals(Class.class) || clazz.equals(Class[].class) || clazz.equals(Integer.class)
+				|| clazz.equals(Byte.class) || clazz.equals(Short.class) || clazz.equals(Long.class) || clazz.equals(Double.class)
+				|| clazz.equals(Float.class) || clazz.equals(Character.class);
 	}
 
 	/**

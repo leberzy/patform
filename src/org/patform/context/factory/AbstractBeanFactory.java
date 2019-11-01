@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -264,6 +265,31 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
         return beanProcessor;
     }
 
+
+    //实现HierarchicalBeanFactory
+
+    @Override
+    public BeanFactory getParentBeanFactory() {
+        return parentBeanFactory;
+    }
+
+    protected String[] getSingletonNames() {
+        return singletonCache.keySet().toArray(new String[0]);
+    }
+
+    public String[] getSingletonNames(Class type) {
+        Set keys = this.singletonCache.keySet();
+        Set matches = new HashSet();
+        Iterator itr = keys.iterator();
+        while (itr.hasNext()) {
+            String name = (String) itr.next();
+            Object singletonObject = this.singletonCache.get(name);
+            if (type == null || type.isAssignableFrom(singletonObject.getClass())) {
+                matches.add(name);
+            }
+        }
+        return (String[]) matches.toArray(new String[matches.size()]);
+    }
 
     //-----------------子类需要实现的方法--------------------------
 
