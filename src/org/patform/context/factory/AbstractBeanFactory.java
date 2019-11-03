@@ -82,8 +82,8 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory {
 
 
     @Override
-    public Object getBean(String beanName, Class<?> requireType) {
-        Object bean = getBean(beanName);
+    public <T> T getBean(String beanName, Class<T> requireType) {
+        T bean = (T) getBean(beanName);
         if (requireType.isAssignableFrom(bean.getClass())) {
             return bean;
         }

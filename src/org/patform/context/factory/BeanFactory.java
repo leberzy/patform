@@ -13,7 +13,7 @@ public interface BeanFactory {
     Object getBean(String beanName);
 
 
-    Object getBean(String beanName, Class<?> requireType);
+    <T> T getBean(String beanName, Class<T> requireType);
 
 
     boolean contains(String beanName);

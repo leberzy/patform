@@ -6,9 +6,9 @@ package org.patform.context.util;
  */
 public interface BeanPostProcessor {
 
-    void postProcessorBeforeInitialization(Object existBean, String name);
+    Object postProcessorBeforeInitialization(Object existBean, String name);
 
-    void postProcessorAfterInitialization(Object existBean, String name);
+    Object postProcessorAfterInitialization(Object existBean, String name);
 
 
 }
