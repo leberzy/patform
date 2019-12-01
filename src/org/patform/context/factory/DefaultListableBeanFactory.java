@@ -5,14 +5,11 @@ import org.patform.bean.RootBeanDefinition;
 import org.patform.bean.wrapper.BeanWrapperImpl;
 import org.patform.context.registry.BeanDefinitionRegistry;
 import org.patform.exception.BeansException;
+import org.patform.exception.NoSuchBeanDefinitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -30,6 +27,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     //
     private List<String> beanDefinitionNames = new ArrayList<>();
 
+    public DefaultListableBeanFactory() {
+        this(null);
+    }
 
     public DefaultListableBeanFactory(BeanFactory parent) {
         super(parent);
@@ -54,7 +54,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
     @Override
     public RootBeanDefinition getBeanDefinition(String beanName) {
-        return (RootBeanDefinition) beanDefinitions.get(beanName);
+        RootBeanDefinition beanDefinition = (RootBeanDefinition) beanDefinitions.get(beanName);
+        return Optional.ofNullable(beanDefinition).orElseThrow(() -> new NoSuchBeanDefinitionException(beanName + " not be found."));
     }
 
     @Override
@@ -102,14 +103,16 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
 
-
     @Override
     public <T> Map<String, T> getBeansOfType(Class<T> requireType, boolean includeProtoType, boolean includeFactoryBeans) {
         HashMap<String, T> result = new HashMap<>();
         String[] beanDefinitionNames = getBeanDefinitionNames(requireType);
+        for (String beanName : beanDefinitionNames) {
+            result.put(beanName, getBean(beanName, requireType));
+        }
         String[] singletonNames = getSingletonNames(requireType);
         for (String singletonName : singletonNames) {
-            result.put(singletonName, getBean(singletonName,requireType));
+            result.put(singletonName, getBean(singletonName, requireType));
         }
         return result;
     }

@@ -16,7 +16,7 @@ public class DefaultListableBeanFactoryTest {
     @Test
     public void test() {
 
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory(null);
         factory.registerBeanDefinition("user", new RootBeanDefinition(User.class, RootBeanDefinition.AUTOWIRE_BY_TYPE, RootBeanDefinition.DEPENDENCY_CHECK_NO));
         factory.registerBeanDefinition("cat", new RootBeanDefinition(Cat.class, RootBeanDefinition.AUTOWIRE_BY_TYPE, RootBeanDefinition.AUTOWIRE_NO));
 
@@ -27,7 +27,7 @@ public class DefaultListableBeanFactoryTest {
     @Test
     public void test001() {
 
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        DefaultListableBeanFactory factory = new DefaultListableBeanFactory(null);
         RootBeanDefinition bag = new RootBeanDefinition(Bag.class, RootBeanDefinition.AUTOWIRE_BY_TYPE);
         MutablePropertyValues mpvs = new MutablePropertyValues();
         mpvs.addPropertyValue(new PropertyValue("id",1));

@@ -53,8 +53,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
         this.destroyMethod = other.getDestroyMethod();
     }
 
-    public RootBeanDefinition(MutablePropertyValues propertyValues) {
+    public RootBeanDefinition(Class<?> beanClass, MutablePropertyValues propertyValues) {
         super(propertyValues);
+        this.beanClass = beanClass;
     }
 
     public RootBeanDefinition(Class<?> beanClass, int autowireMode, int dependencyCheck) {
@@ -103,8 +104,6 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
             throw new IllegalStateException("the beanClass not have public constructor.");
         }
     }
-
-
 
 
     public Class<?> getBeanClass() {

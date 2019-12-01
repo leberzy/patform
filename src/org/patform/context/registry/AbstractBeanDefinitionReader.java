@@ -29,4 +29,8 @@ public abstract class AbstractBeanDefinitionReader {
     public void setBeanClassLoader(ClassLoader beanClassLoader) {
         this.beanClassLoader = beanClassLoader;
     }
+
+    public abstract void loadBeanDefinition();
+
+
 }
