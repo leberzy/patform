@@ -7,5 +7,5 @@ public interface ResourceLoader {
 
     String CLASSPATH_URL_PREFIX = "classpath:";
 
-    Resource getResource();
+    Resource getResource(String location);
 }

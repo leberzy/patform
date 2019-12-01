@@ -31,6 +31,10 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     private List<String> beanDefinitionNames = new ArrayList<>();
 
 
+    public DefaultListableBeanFactory(BeanFactory parent) {
+        super(parent);
+    }
+
     @Override
     protected Object resolveValueIfNecessary(String beanName, RootBeanDefinition beanDefinition, BeanWrapperImpl beanWrapper, String name, Object value) {
         return value;
@@ -97,24 +101,16 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         return matched.toArray(new String[0]);
     }
 
+
+
     @Override
-    public Map<String, Object> getBeansOfType(Class<?> requireType, boolean includeProtoType, boolean includeFactoryBeans) {
-
-
-        HashMap<String, Object> result = new HashMap<>();
+    public <T> Map<String, T> getBeansOfType(Class<T> requireType, boolean includeProtoType, boolean includeFactoryBeans) {
+        HashMap<String, T> result = new HashMap<>();
         String[] beanDefinitionNames = getBeanDefinitionNames(requireType);
-        for (String beanDefinitionName : beanDefinitionNames) {
-            RootBeanDefinition beanDefinition = getBeanDefinition(beanDefinitionName);
-            if (beanDefinition.isSingleton() || includeProtoType) {
-                result.put(beanDefinitionName, beanDefinition);
-            }
-        }
         String[] singletonNames = getSingletonNames(requireType);
         for (String singletonName : singletonNames) {
-            result.put(singletonName, getBean(singletonName));
+            result.put(singletonName, getBean(singletonName,requireType));
         }
-
-
         return result;
     }
 

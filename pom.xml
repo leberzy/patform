@@ -44,10 +44,10 @@
 
     </dependencies>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>ali</id>-->
-<!--            <url>http://maven.aliyun.com/nexus/content/groups/pubilc</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/pubilc</url>
+        </repository>
+    </repositories>
 </project>
